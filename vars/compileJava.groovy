@@ -1,16 +1,11 @@
-def call(String gitRepo, String branch = 'main') {
+def call(Map config) {
     pipeline {
         agent any
-
-        options {
-            timestamps()
-            disableConcurrentBuilds()
-        }
 
         stages {
             stage('Clone Code') {
                 steps {
-                    git branch: branch, url: gitRepo
+                    git branch: config.branch, url: config.gitRepo
                 }
             }
 
